@@ -10,20 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/findAll")
-public class UserController extends HttpServlet {
-    private UserService userService= new UserServiceImpl();
+@WebServlet("/updateById")
+public class UserUpdateController extends HttpServlet {
+    private UserService userService=new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> all = userService.findAll();
-        req.setAttribute("users",all);
-        req.getRequestDispatcher("/list.jsp").forward(req,resp);
+       doPost(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        String gender = req.getParameter("gender");
+        String email = req.getParameter("email");
+        User user = new User(Integer.parseInt(id), name, password, gender, email);
+        boolean update = userService.update(user);
+        if (update){
+            resp.sendRedirect("/findAll");
+        }
     }
 }

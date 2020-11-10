@@ -14,4 +14,24 @@ public class UserServiceImpl implements UserService {
 
         return userDao.findAll();
     }
+
+    @Override
+    public User findById(int id) {
+        return userDao.findById(id);
+    }
+
+    @Override
+    public boolean delete(int id) {
+        return userDao.delete(id);
+    }
+
+    @Override
+    public boolean insert(User user) {
+        return userDao.insert(user);
+    }
+
+    @Override
+    public boolean update(User user) {
+        return userDao.update(user);
+    }
 }

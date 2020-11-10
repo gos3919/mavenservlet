@@ -17,7 +17,6 @@
 <body>
     <table>
         <tr>
-            <td>id</td>
             <td>name</td>
             <td>password</td>
             <td>gender</td>
@@ -26,17 +25,19 @@
         </tr>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
                 <td>${user.name}</td>
                 <td>${user.password}</td>
                 <td>${user.gender}</td>
                 <td>${user.email}</td>
                 <td>
-                    <button type="button">update</button>
-                    <button type="button">delete</button>
+                    <a href="findById?id=${user.id}">update</a>
+                    <a href="deleteById?id=${user.id}">delete</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
+<script>
+
+</script>
 </body>
 </html>

@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/findAll")
-public class UserController extends HttpServlet {
-    private UserService userService= new UserServiceImpl();
+@WebServlet("/findById")
+public class UserFindById extends HttpServlet {
+    private UserService userService=new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> all = userService.findAll();
-        req.setAttribute("users",all);
-        req.getRequestDispatcher("/list.jsp").forward(req,resp);
+        String id = req.getParameter("id");
+        User user = userService.findById(Integer.parseInt(id));
+        req.setAttribute("user",user);
+        req.getRequestDispatcher("/update.jsp").forward(req,resp);
     }
 
     @Override
